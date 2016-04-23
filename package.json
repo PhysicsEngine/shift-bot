@@ -1,25 +1,58 @@
 {
   "name": "shift-bot",
+  "description": "Part time job management bot",
   "version": "0.0.1",
-  "description": "Part time job management system",
-  "main": "index.js",
-  "scripts": {
-    "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "author": "Kai Sasaki",
+  "bugs": {
+    "url": "https://github.com/PhysicsEngine/shift-bot"
   },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/PhysicsEngine/shift-bot.git"
-  },
-  "author": "Kai Sasaki <lewuathe@me.com>",
-  "license": "MIT",
   "dependencies": {
-    "@3846masa/linebot": "^0.1.1",
-    "babel": "^5.8.21",
-    "body-parser": "^1.13.3",
+    "axios": "^0.9.1",
+    "body-parser": "^1.15.0",
+    "express": "^4.13.4",
     "compression": "^1.5.2",
     "cors": "^2.7.1",
-    "express": "^4.13.3",
     "resource-router-middleware": "^0.5.1"
+  },
+  "devDependencies": {
+    "babel-register": "^6.7.2",
+    "babel-cli": "^6.5.1",
+    "babel-eslint": "^6.0.2",
+    "babel-plugin-add-module-exports": "^0.1.2",
+    "babel-plugin-syntax-async-functions": "^6.5.0",
+    "babel-plugin-transform-async-to-generator": "^6.5.0",
+    "babel-preset-es2015-node5": "^1.2.0",
+    "esdoc": "^0.4.6",
+    "esdoc-importpath-plugin": "0.0.1",
+    "eslint": "^2.7.0",
+    "fixpack": "^2.3.0",
+    "npm-run-all": "^1.7.0"
+  },
+  "files": [
+    "README.md",
+    "index.js",
+    "package.json",
+    "dist"
+  ],
+  "homepage": "https://github.com/PhysicsEngine/shift-bot#readme",
+  "keywords": [
+    "LINE"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PhysicsEngine/shit-bot.git"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "build": "./node_modules/.bin/npm-run-all --parallel build:*",
+    "build:doc": "esdoc -c ./.esdoc.json",
+    "build:js": "./node_modules/.bin/babel lib/ --out-dir dist/",
+    "fixpack": "fixpack",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "npm-run-all --parallel watch:*",
+    "watch:doc": "watch \"npm run build:doc\" ./lib",
+    "watch:js": "babel lib/ --out-dir dist/ --watch"
   }
 }

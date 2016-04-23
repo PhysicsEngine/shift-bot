@@ -1,16 +1,9 @@
-Shift Bot
-==================================
+shift-bot
+=====
 
-Part time job management system
+Part time job management
 
-# How to launch
 
-```
-$ PORT=3000 npm start
-```
+# LICENSE
 
-# License
-
-MIT License
-
-Based on originally [express-es6-rest-api](https://github.com/developit/express-es6-rest-api)
+MIT License. The source code is mainly powered by [3846masa/node-linebot](https://github.com/3846masa/node-linebot).

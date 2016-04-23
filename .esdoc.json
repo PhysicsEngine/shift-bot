@@ -1,0 +1,14 @@
+{
+  "source": "./lib",
+  "destination": "./doc",
+  "title": "@3846masa/linebot | ESDoc",
+  "plugins": [{
+    "name": "esdoc-importpath-plugin",
+    "option": {
+      "replaces": [{
+        "from": "^lib/",
+        "to": "dist/"
+      }]
+    }
+  }]
+}
