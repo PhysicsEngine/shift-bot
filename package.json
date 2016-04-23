@@ -3,6 +3,9 @@
   "description": "Part time job management bot",
   "version": "0.0.1",
   "author": "Kai Sasaki",
+  "engines": {
+    "node": "5.11.0"
+  },
   "bugs": {
     "url": "https://github.com/PhysicsEngine/shift-bot"
   },
@@ -46,6 +49,7 @@
   },
   "scripts": {
     "start": "node index.js",
+    "postinstall": "npm run build",
     "build": "./node_modules/.bin/npm-run-all --parallel build:*",
     "build:doc": "esdoc -c ./.esdoc.json",
     "build:js": "./node_modules/.bin/babel lib/ --out-dir dist/",
