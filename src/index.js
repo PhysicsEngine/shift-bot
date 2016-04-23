@@ -1,10 +1,13 @@
 // module.exports = require('./dist/linebot.js');
+import ApiRouter from './ApiRouter';
 import LineBot from '../dist/linebot';
 
+console.log(ApiRouter);
 const bot = new LineBot({
   channelID: process.env.LINEBOT_CHANNELID,
   channelSecret: process.env.LINEBOT_CHNNELSECRET,
-  MID: process.env.LINEBOT_MID
+  MID: process.env.LINEBOT_MID,
+  apiRouter: ApiRouter
 });
 
 bot.on('message', (res) => {
@@ -22,4 +25,7 @@ bot.on('message', (res) => {
   }
 });
 
-bot.listen(3000);
+const port = process.env.PORT || 3000;
+bot.listen(port);
+
+console.log(`Starting api server on ${port}...`);
