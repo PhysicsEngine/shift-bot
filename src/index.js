@@ -1,8 +1,10 @@
 // module.exports = require('./dist/linebot.js');
 import ApiRouter from './ApiRouter';
 import LineBot from '../dist/linebot';
+import winston from 'winston';
 
-console.log(ApiRouter);
+winston.level = 'debug';
+
 const bot = new LineBot({
   channelID: process.env.LINEBOT_CHANNELID,
   channelSecret: process.env.LINEBOT_CHNNELSECRET,
