@@ -55,7 +55,7 @@
     "build:js": "./node_modules/.bin/babel lib/ --out-dir dist/",
     "fixpack": "fixpack",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "watch": "npm-run-all --parallel watch:*",
+    "watch": "./node_modules/.bin/npm-run-all --parallel watch:*",
     "watch:doc": "watch \"npm run build:doc\" ./lib",
     "watch:js": "babel lib/ --out-dir dist/ --watch"
   }
