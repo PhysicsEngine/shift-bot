@@ -1,8 +1,21 @@
 shift-bot
 =====
 
-Part time job management
+Part time job management service
 
+# How to build
+
+Automatically build just after resolving all dependencies.
+
+```
+$ npm install
+```
+
+If you change `lib/` codes, it is necessary to build manually. Build codes are put in `dist/` and ES documents are in `doc`.
+
+```
+$ npm run build
+```
 
 # LICENSE
 
