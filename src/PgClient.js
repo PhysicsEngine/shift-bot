@@ -1,4 +1,5 @@
 import pg from 'pg';
+import winston from 'winston';
 
 /**
  * Data Models
@@ -14,14 +15,26 @@ class PgClient {
 
   _init({ databaseUrl }) {
     this._databaseUrl = databaseUrl;
+    this._client = new pg.Client(this._databaseUrl);
+    this._client.connect();
   }
 
   /**
    * request is send by each member.
    * They are to be stored into requests table with this method.
    */
-  storeRequest({ member, request }) {
-    //TODO: Store a request on table
+  storeRequest({ member, request, callback }) {
+    this._client.connect(function(err) {
+      if (err) {
+        return winston.log('error', 'Error fetching client from pool', err);
+      }
+      client.query('INSERT INTO requests (member, request) VALUES($1, $2)', [member, request],
+          function(err, results){
+        if (err) {
+          return winston.log('error', 'INSERTING requests is failed');
+        }
+      });
+    });
   }
 
   /**
@@ -29,7 +42,7 @@ class PgClient {
    * Time span is assumed to be like one week, one month.
    * when a shift table is fixed.
    */
-  requestsInTimespan({ time }) {
+  requestsInTimespan({ time, callback }) {
     // TODO: Return the request of all members in given time span
   }
 
@@ -37,21 +50,41 @@ class PgClient {
    * Store the optimized shift table into shift.
    *
    */
-  storeShift({ shift }) {
+  storeShift({ shift, callback }) {
     // TODO: Store the given shift
   }
 
   /**
    * Register a member in existing team.
    */
-  registerMember({ team, member }) {
-    //TODO: Register a member into the team
+  registerMember({ team, name, callback }) {
+    this._client.query({
+      text: "INSERT INTO members (team, name) VALUES($1, $2)",
+      values: [team, name]
+    }, function(err, results) {
+      if (err) {
+        winston.log('error', 'Registering team failed');
+        callback(err, null);
+      }
+      callback(null, results);
+    });
   }
 
   /**
    * Register a new team
    */
-  registerTeam ({ team }) {
-    // TODO: Register a team
+  registerTeam ({ name, callback }) {
+    this._client.query({
+      text: "INSERT INTO teams (name) VALUES($1)",
+      values: [name]
+    }, function(err, results) {
+      if (err) {
+        winston.log('error', 'Registering team failed');
+        callback(err, null);
+      }
+      callback(null, results);
+    });
   }
 }
+
+export default PgClient;
