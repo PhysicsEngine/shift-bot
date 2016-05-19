@@ -70,6 +70,38 @@ export default function() {
     })
   });
 
+  // requests are usually send by bot interface
+  // This is for admin usage or debug
+  api.post('/requests', (req, res, next) => {
+    var body = _parseBody(req.body);
+    winston.debug('shift request:', body.member);
+    var member = body.member;
+    var request = body.request;
+    if (!member) {
+      res.json({
+        status: "FAILED",
+        message: "Invalid member"
+      })
+    }
+    pgclient.storeRequest({
+      member: member,
+      request: request,
+      callback: function(err, results) {
+        if (err) {
+          res.json({
+            status: "FAILED",
+            message: err
+          })
+        } else {
+          res.json({
+            status: "SUCCESS",
+            message: "Storing request succeeded " + member
+          })
+        }
+      }
+    })
+  });
+
   api.use('/users', (req, res, next) => {
     winston.debug("user list api  ");
     res.json({
