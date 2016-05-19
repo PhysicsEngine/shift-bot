@@ -1,19 +1,21 @@
 -- $ heroku pg:psql < create.sql
 
-
--- DROP TABLE members;
-CREATE TABLE IF NOT EXISTS members(
-  id bigserial PRIMARY KEY,
-  name varchar(80),
-  team bigint references teams(id)
-);
+DROP TABLE requests;
+DROP TABLE members;
+DROP TABLE teams;
+DROP TABLE shifts;
 
 CREATE TABLE IF NOT EXISTS teams(
   id bigserial PRIMARY KEY,
   name varchar(80)
 );
 
--- DROP TABLE requests;
+CREATE TABLE IF NOT EXISTS members(
+  id bigserial PRIMARY KEY,
+  name varchar(80),
+  team bigint references teams(id)
+);
+
 CREATE TABLE IF NOT EXISTS requests(
   id bigserial PRIMARY KEY,
   member bigint references members(id),
