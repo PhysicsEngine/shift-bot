@@ -24,16 +24,15 @@ class PgClient {
    * They are to be stored into requests table with this method.
    */
   storeRequest({ member, request, callback }) {
-    this._client.connect(function(err) {
+    this._client.query({
+      text: "INSERT INTO requests (member, request) VALUES($1, $2)",
+      values: [member, request]
+    }, function(err, results) {
       if (err) {
-        return winston.log('error', 'Error fetching client from pool', err);
+        winston.log('error', 'Storing request failed');
+        callback(err, null);
       }
-      client.query('INSERT INTO requests (member, request) VALUES($1, $2)', [member, request],
-          function(err, results){
-        if (err) {
-          return winston.log('error', 'INSERTING requests is failed');
-        }
-      });
+      callback(null, results);
     });
   }
 
