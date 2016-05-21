@@ -24,4 +24,4 @@ class MessageParser {
     }
 }
 
-module.exports = MessageParser;
+export default MessageParser;

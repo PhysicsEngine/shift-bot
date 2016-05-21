@@ -16,6 +16,9 @@ const bot = new LineBot({
 bot.on('message', (res) => {
   const content = res.content;
   winston.log('debug', 'message: ', content);
+  
+  // TODO(gologo13): check if a line user belongs to a team.
+  
   if ( content.contentType === LineBot.CONST.CONTENT_TYPE.TEXT ) {
     winston.debug('CONTENT_TYPE.TEXT');
     const results = MessageParser.parse(content.text);
