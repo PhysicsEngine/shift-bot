@@ -24,13 +24,15 @@ class PgClient {
    * They are to be stored into requests table with this method.
    */
   storeRequest({ member, team, start_time, end_time, availability, callback }) {
+    winston.log('debug', arguments);
+    
     this._client.query({
       text: "INSERT INTO requests (member, team, start_time, end_time, availability) VALUES($1, $2, $3, $4, $5)",
       values: [member, team, start_time, end_time, availability]
     }, function(err, results) {
       if (err) {
-        winston.log('error', 'Storing request failed');
-        callback(err, null);
+        winston.log('error', 'Storing request failed: error' + err);
+        return callback(err, null);
       }
       callback(null, results);
     });
@@ -63,7 +65,7 @@ class PgClient {
     }, function(err, results) {
       if (err) {
         winston.log('error', 'Registering team failed');
-        callback(err, null);
+        return callback(err, null);
       }
       callback(null, results);
     });
@@ -79,7 +81,7 @@ class PgClient {
     }, function(err, results) {
       if (err) {
         winston.log('error', 'Registering team failed');
-        callback(err, null);
+        return callback(err, null);
       }
       callback(null, results);
     });
