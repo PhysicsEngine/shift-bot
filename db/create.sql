@@ -21,14 +21,14 @@ CREATE TABLE IF NOT EXISTS requests(
   id bigserial PRIMARY KEY,
   member bigint references members(id),
   team bigint references teams(id),
-  start_time date,
-  end_time date,
+  start_time timestamp,
+  end_time timestamp,
   availability real
 );
 
 CREATE TABLE IF NOT EXISTS shifts(
   id bigserial PRIMARY KEY,
-  start_time date,
-  end_time date,
+  start_time timestamp,
+  end_time timestamp,
   time_table json
 );
