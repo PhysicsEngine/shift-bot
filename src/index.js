@@ -2,6 +2,7 @@
 import ApiRouter from './ApiRouter';
 import LineBot from '../dist/linebot';
 import winston from 'winston';
+import MessageParser from './MessageParser';
 
 winston.level = 'debug';
 
@@ -17,9 +18,21 @@ bot.on('message', (res) => {
   winston.log('debug', 'message: ', content);
   if ( content.contentType === LineBot.CONST.CONTENT_TYPE.TEXT ) {
     winston.debug('CONTENT_TYPE.TEXT');
+    const results = MessageParser.parse(content.text);
+    if (results.length == 0) {
+      bot.postText({
+        user: content.from,
+        message: "Reject. Please send your shift in csv format."
+      });
+      return;
+    }
+    
+    
+    
+    
     bot.postText({
       user: content.from,
-      message: content.text
+      message: "OK. Nice shift"
     });
   } else {
     winston.debug('CONTENT_TYPE.OTHER');

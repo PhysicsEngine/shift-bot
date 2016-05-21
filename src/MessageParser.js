@@ -1,4 +1,4 @@
-class CsvParser {
+class MessageParser {
     /**
      * Parse text formatted like below.
      * 
@@ -24,4 +24,4 @@ class CsvParser {
     }
 }
 
-module.exports = CsvParser;
+module.exports = MessageParser;
