@@ -20,17 +20,20 @@
     "winston": "^2.2.0"
   },
   "devDependencies": {
-    "babel-register": "^6.7.2",
+    "babel": "^6.5.2",
     "babel-cli": "^6.5.1",
     "babel-eslint": "^6.0.2",
     "babel-plugin-add-module-exports": "^0.1.2",
     "babel-plugin-syntax-async-functions": "^6.5.0",
     "babel-plugin-transform-async-to-generator": "^6.5.0",
     "babel-preset-es2015-node5": "^1.2.0",
+    "babel-register": "^6.7.2",
+    "chai": "^3.5.0",
     "esdoc": "^0.4.6",
     "esdoc-importpath-plugin": "0.0.1",
     "eslint": "^2.7.0",
     "fixpack": "^2.3.0",
+    "mocha": "^2.4.5",
     "npm-run-all": "^1.7.0"
   },
   "files": [
@@ -56,7 +59,7 @@
     "build:doc": "esdoc -c ./.esdoc.json",
     "build:js": "./node_modules/.bin/babel lib/ --out-dir dist/",
     "fixpack": "fixpack",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "node_modules/.bin/mocha --compilers js:babel-core/register",
     "watch": "./node_modules/.bin/npm-run-all --parallel watch:*",
     "watch:doc": "watch \"npm run build:doc\" ./lib",
     "watch:js": "babel lib/ --out-dir dist/ --watch"
