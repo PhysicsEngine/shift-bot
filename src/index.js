@@ -27,6 +27,7 @@ bot.on('message', (res) => {
     winston.debug('CONTENT_TYPE.TEXT');
     
     const results = MessageParser.parse(content.text);
+    winston.debug("MessageParser result" + JSON.stringify(results));
     if (results.length == 0) {
       bot.postText({
         user: content.from,
@@ -36,6 +37,7 @@ bot.on('message', (res) => {
     }
     
     // TODO(gologo13): cbハンドリングが面倒くさいので、とりあえず1つのシフトだけ登録.
+    winston.debug("Trying to storeRequest");
     pgClient.storeRequest({
       member: "gologo13", // TODO(gologo13): FIXME
       team: 1,            // TODO(gologo13): FIXME
@@ -44,13 +46,15 @@ bot.on('message', (res) => {
       availability: results[0].availability,
       callback: function(err, results) {
         if (err) {
+          winston.debug("storeRequest failure");
           bot.postText({
             user: content.from,
             mesage: "Sorry, failed to register your shift"
           })
           return;
         }
-        
+
+        winston.debug("storeRequest success");
         bot.postText({
           user: content.from,
           message: "OK. Nice shift"
