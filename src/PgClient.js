@@ -23,10 +23,10 @@ class PgClient {
    * request is send by each member.
    * They are to be stored into requests table with this method.
    */
-  storeRequest({ member, request, callback }) {
+  storeRequest({ member, team, start_time, end_time, availability, callback }) {
     this._client.query({
-      text: "INSERT INTO requests (member, request) VALUES($1, $2)",
-      values: [member, request]
+      text: "INSERT INTO requests (member, team, start_time, end_time, availability) VALUES($1, $2, $3, $4, $5)",
+      values: [member, team, start_time, end_time, availability]
     }, function(err, results) {
       if (err) {
         winston.log('error', 'Storing request failed');
