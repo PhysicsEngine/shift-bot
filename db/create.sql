@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS teams(
 CREATE TABLE IF NOT EXISTS members(
   id bigserial PRIMARY KEY,
   name varchar(80),
-  from varchar(80),
+  line_id varchar(80),
   team bigint references teams(id)
 );
 
@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS requests(
   team bigint references teams(id),
   start_time date,
   end_time date,
-  availability double
+  availability real
 );
 
 CREATE TABLE IF NOT EXISTS shifts(
