@@ -39,7 +39,7 @@ bot.on('message', (res) => {
     // TODO(gologo13): cbハンドリングが面倒くさいので、とりあえず1つのシフトだけ登録.
     winston.debug("Trying to storeRequest");
     pgClient.storeRequest({
-      member: "gologo13", // TODO(gologo13): FIXME
+      member: 1,          // TODO(gologo13): FIXME
       team: 1,            // TODO(gologo13): FIXME
       start_time: results[0].start_date,
       end_time: results[0].end_date,
