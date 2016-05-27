@@ -5,9 +5,14 @@ DROP TABLE members;
 DROP TABLE teams;
 DROP TABLE shifts;
 
+
+-- days_in_shift: The days included in a shift table
+-- max_shift_count_in_routine: The max shift tables generated in one routine
 CREATE TABLE IF NOT EXISTS teams(
   id bigserial PRIMARY KEY,
-  name varchar(80)
+  name varchar(80),
+  days_in_shift bigint,
+  max_shift_count_in_routine bigint
 );
 
 CREATE TABLE IF NOT EXISTS members(
