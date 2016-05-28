@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS requests(
 
 CREATE TABLE IF NOT EXISTS shifts(
   id bigserial PRIMARY KEY,
-  start_time timestamp,
-  end_time timestamp,
+  team bigint references teams(id),
+  start_date date,
   time_table json
 );
