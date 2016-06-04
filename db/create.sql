@@ -1,9 +1,9 @@
 -- $ heroku pg:psql < create.sql
 
 DROP TABLE requests;
+DROP TABLE shifts;
 DROP TABLE members;
 DROP TABLE teams;
-DROP TABLE shifts;
 
 
 -- days_in_shift: The days included in a shift table
